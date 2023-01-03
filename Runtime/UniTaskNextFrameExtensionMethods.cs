@@ -18,6 +18,24 @@ namespace Kogane
 
         public static async UniTask NextFrame
         (
+            this GameObject  self,
+            PlayerLoopTiming timing
+        )
+        {
+            await UniTask.NextFrame( timing, self.GetCancellationTokenOnDestroy() );
+        }
+
+        public static async UniTask NextFrame
+        (
+            this Component   self,
+            PlayerLoopTiming timing
+        )
+        {
+            await self.gameObject.NextFrame( timing );
+        }
+
+        public static async UniTask NextFrame
+        (
             this GameObject   self,
             CancellationToken cancellationToken
         )
